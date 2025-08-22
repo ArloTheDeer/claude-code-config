@@ -1,0 +1,27 @@
+{
+  "name": "claude-code-config",
+  "version": "1.0.0",
+  "description": "這是一套為 Claude Code 和其他 AI 助理設計的標準化工作流程指令集，提供結構化的方法來處理軟體開發的各個階段，從需求研究、PRD 撰寫到實作任務管理。",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArloTheDeer/claude-code-config.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ArloTheDeer/claude-code-config/issues"
+  },
+  "homepage": "https://github.com/ArloTheDeer/claude-code-config#readme",
+  "dependencies": {
+    "shelljs": "^0.10.0"
+  }
+}

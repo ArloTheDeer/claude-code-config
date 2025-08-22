@@ -132,7 +132,7 @@ installConfig();
 
 ## 任務
 
-- [ ] 1. 初始化 Node.js 專案並安裝相依套件
+- [x] 1. 初始化 Node.js 專案並安裝相依套件
   - 1.1 使用 `npm init` 初始化專案並建立 package.json
   - 1.2 使用 `npm install shelljs` 安裝跨平台檔案操作套件
   - 1.3 確認 shelljs 套件已安裝最新版本並記錄在 package.json
