@@ -72,9 +72,27 @@ function installConfig() {
       }
     });
     
-    // TODO: Implement user feedback messages
+    // Final user feedback
+    console.log('');
+    if (errorCount > 0) {
+      console.log(`⚠️  Installation completed with ${errorCount} errors out of ${files.length} files`);
+      process.exit(1);
+    } else {
+      console.log(`✅ Installation successful! Installed ${successCount} files to ${targetDir}`);
+      if (conflicts.length > 0) {
+        console.log(`⚠️  Overwritten ${conflicts.length} existing files`);
+      }
+    }
     
-    console.log('✅ Installation complete!');
+    console.log('');
+    console.log('📋 Installed files:');
+    files.forEach(file => {
+      const filename = path.basename(file);
+      console.log(`  • ${filename}`);
+    });
+    
+    console.log('');
+    console.log('🎉 You can now use these commands in Claude Code!');
     
   } catch (error) {
     console.error(`Error: ${error.message}`);

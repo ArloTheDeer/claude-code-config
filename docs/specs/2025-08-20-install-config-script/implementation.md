@@ -182,7 +182,7 @@ installConfig();
   - 5.4 使用 `shell.error()` 處理檔案複製時的錯誤
   - 5.5 保持檔案的原始名稱和結構
 
-- [ ] 6. 完成 npm script 設定與使用者回饋
+- [x] 6. 完成 npm script 設定與使用者回饋
   - 6.1 編輯 package.json 的 scripts 區段，新增 "install-config": "node scripts/install-config.js"
   - 6.2 實作安裝成功的訊息顯示
     ```javascript
