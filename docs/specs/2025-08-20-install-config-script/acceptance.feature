@@ -14,7 +14,7 @@
     當 我執行 "npm run install-config"
     那麼 系統應該自動建立目標目錄
     並且 成功複製所有 4 個 .md 檔案
-    並且 顯示 "安裝成功！已安裝 4 個檔案到 C:\Users\[username]\.claude\commands\"
+    並且 顯示 "Installation successful! Installed 4 files to C:\Users\[username]\.claude\commands\"
 
   場景: 首次安裝 - macOS/Linux 平台
     假設 我在 macOS 或 Linux 系統上
@@ -22,43 +22,46 @@
     當 我執行 "npm run install-config"
     那麼 系統應該自動建立目標目錄
     並且 成功複製所有 4 個 .md 檔案
-    並且 顯示 "安裝成功！已安裝 4 個檔案到 ~/.claude/commands/"
+    並且 顯示 "Installation successful! Installed 4 files to ~/.claude/commands/"
 
-  場景: 檔案衝突 - 使用者選擇覆蓋
+  場景: 檔案衝突 - 預設停止安裝
     假設 目標目錄已存在
     並且 目標目錄中已有 "create-prd.md" 檔案
     當 我執行 "npm run install-config"
-    那麼 系統應該提示 "發現以下檔案已存在：create-prd.md"
-    並且 詢問 "是否要覆蓋現有檔案？"
-    當 我選擇 "是"
-    那麼 系統應該覆蓋現有檔案
-    並且 顯示 "安裝成功！已安裝 4 個檔案"
+    那麼 系統應該顯示 "❌ Found existing files: create-prd.md"
+    並且 顯示 "Use --overwrite flag to overwrite existing files:"
+    並且 顯示 "npm run install-config -- --overwrite"
+    並且 安裝程序應該停止且不修改任何檔案
 
-  場景: 檔案衝突 - 使用者選擇不覆蓋
+  場景: 檔案衝突 - 使用 overwrite 參數覆蓋
     假設 目標目錄已存在
     並且 目標目錄中已有 "research.md" 檔案
-    當 我執行 "npm run install-config"
-    那麼 系統應該提示 "發現以下檔案已存在：research.md"
-    並且 詢問 "是否要覆蓋現有檔案？"
-    當 我選擇 "否"
-    那麼 系統應該取消安裝
-    並且 顯示 "安裝已取消，未修改任何檔案"
-    並且 原有檔案保持不變
+    當 我執行 "npm run install-config -- --overwrite"
+    那麼 系統應該覆蓋現有檔案
+    並且 顯示 "✅ Installation successful! Installed 4 files"
+    並且 顯示 "⚠️  Overwritten 1 existing files"
 
-  場景: 多個檔案衝突
+  場景: 多個檔案衝突 - 預設停止
     假設 目標目錄已存在
     並且 目標目錄中已有 "create-prd.md" 和 "create-impl-plan.md" 檔案
     當 我執行 "npm run install-config"
-    那麼 系統應該提示 "發現以下檔案已存在：create-prd.md, create-impl-plan.md"
-    並且 詢問 "是否要覆蓋現有檔案？"
-    當 我選擇 "是"
+    那麼 系統應該顯示 "❌ Found existing files: create-prd.md, create-impl-plan.md"
+    並且 顯示 "Use --overwrite flag to overwrite existing files:"
+    並且 顯示 "npm run install-config -- --overwrite"
+    並且 安裝程序應該停止且不修改任何檔案
+  
+  場景: 多個檔案衝突 - 使用 overwrite 參數
+    假設 目標目錄已存在
+    並且 目標目錄中已有 "create-prd.md" 和 "create-impl-plan.md" 檔案
+    當 我執行 "npm run install-config -- --overwrite"
     那麼 系統應該覆蓋所有衝突的檔案
-    並且 顯示 "安裝成功！已安裝 4 個檔案"
+    並且 顯示 "✅ Installation successful! Installed 4 files"
+    並且 顯示 "⚠️  Overwritten 2 existing files"
 
   場景: 權限不足錯誤
     假設 目標目錄存在但沒有寫入權限
     當 我執行 "npm run install-config"
-    那麼 系統應該顯示錯誤訊息 "錯誤：沒有寫入權限"
+    那麼 系統應該顯示錯誤訊息 "Error: Permission denied"
     並且 安裝過程應該終止
 
   場景大綱: 跨平台路徑處理

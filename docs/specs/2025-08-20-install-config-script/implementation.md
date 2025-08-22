@@ -46,41 +46,22 @@
   - 在執行命令後檢查是否有錯誤發生
   - 返回錯誤訊息或 null
 
-### Inquirer.js 主要 API 使用說明
+### 命令列參數處理
 
-根據 Inquirer.js 文檔（`llm-docs/inquirerjs.txt`），本專案會使用：
+使用 Node.js 原生的 `process.argv` 來處理 `--overwrite` 參數：
 
-- **基本安裝**
-  ```bash
-  npm install inquirer
-  ```
+```javascript
+// Check for --overwrite flag
+const hasOverwriteFlag = process.argv.includes('--overwrite');
 
-- **confirm 提示** - 用於詢問使用者是否覆蓋檔案
-  ```javascript
-  import inquirer from 'inquirer';
-  
-  const answers = await inquirer.prompt([{
-    type: 'confirm',
-    name: 'overwrite',
-    message: '發現以下檔案已存在，是否要覆蓋？',
-    default: false
-  }]);
-  ```
-
-- **錯誤處理**
-  ```javascript
-  inquirer.prompt([/* questions */])
-    .then((answers) => {
-      // 處理回答
-    })
-    .catch((error) => {
-      if (error.isTtyError) {
-        // 提示無法在當前環境渲染
-      } else {
-        // 其他錯誤
-      }
-    });
-  ```
+// Example usage
+if (conflicts.length > 0 && !hasOverwriteFlag) {
+  console.log(`❌ Found existing files: ${conflicts.join(', ')}`);
+  console.log('Use --overwrite flag to overwrite existing files:');
+  console.log('npm run install-config -- --overwrite');
+  process.exit(1);
+}
+```
 
 ### 程式碼範例結構
 
@@ -88,25 +69,27 @@
 const shell = require('shelljs');
 const path = require('path');
 const os = require('os');
-const inquirer = require('inquirer');
 
-async function installConfig() {
+function installConfig() {
   try {
-    // 設定目標路徑
+    // Check for --overwrite flag
+    const hasOverwriteFlag = process.argv.includes('--overwrite');
+    
+    // Set target directory
     const targetDir = path.join(os.homedir(), '.claude', 'commands');
     
-    // 檢查並建立目錄
+    // Check and create directory
     if (!shell.test('-d', targetDir)) {
       shell.mkdir('-p', targetDir);
       if (shell.error()) {
-        throw new Error(`無法建立目錄: ${shell.error()}`);
+        throw new Error(`Failed to create directory: ${shell.error()}`);
       }
     }
     
-    // 取得檔案清單
+    // Get file list
     const files = shell.ls('commands/*.md');
     
-    // 檢查衝突檔案
+    // Check for conflicting files
     const conflicts = [];
     files.forEach(file => {
       const filename = path.basename(file);
@@ -116,38 +99,34 @@ async function installConfig() {
       }
     });
     
-    // 如果有衝突，詢問使用者
-    if (conflicts.length > 0) {
-      const { overwrite } = await inquirer.prompt([{
-        type: 'confirm',
-        name: 'overwrite',
-        message: `發現以下檔案已存在：${conflicts.join(', ')}\n是否要覆蓋現有檔案？`,
-        default: false
-      }]);
-      
-      if (!overwrite) {
-        console.log('安裝已取消，未修改任何檔案');
-        return;
-      }
+    // If conflicts exist and no --overwrite flag, stop installation
+    if (conflicts.length > 0 && !hasOverwriteFlag) {
+      console.log(`❌ Found existing files: ${conflicts.join(', ')}`);
+      console.log('Use --overwrite flag to overwrite existing files:');
+      console.log('npm run install-config -- --overwrite');
+      process.exit(1);
     }
     
-    // 複製檔案
+    // Copy files
     files.forEach(file => {
       shell.cp(file, targetDir);
       if (shell.error()) {
-        console.error(`錯誤：無法複製 ${file}`);
+        console.error(`Error: Failed to copy ${file}`);
       }
     });
     
-    console.log(`✅ 安裝成功！已安裝 ${files.length} 個檔案到 ${targetDir}`);
+    console.log(`✅ Installation successful! Installed ${files.length} files to ${targetDir}`);
+    if (conflicts.length > 0) {
+      console.log(`⚠️  Overwritten ${conflicts.length} existing files`);
+    }
     
   } catch (error) {
-    console.error(`錯誤：${error.message}`);
+    console.error(`Error: ${error.message}`);
     process.exit(1);
   }
 }
 
-// 執行安裝
+// Execute installation
 installConfig();
 ```
 
@@ -156,15 +135,14 @@ installConfig();
 - [ ] 1. 初始化 Node.js 專案並安裝相依套件
   - 1.1 使用 `npm init` 初始化專案並建立 package.json
   - 1.2 使用 `npm install shelljs` 安裝跨平台檔案操作套件
-  - 1.3 使用 `npm install inquirer` 安裝使用者互動套件
-  - 1.4 使用 `npm install chalk` 安裝彩色終端輸出套件（可選）
-  - 1.5 確認所有套件都已安裝最新版本並記錄在 package.json
+  - 1.3 確認 shelljs 套件已安裝最新版本並記錄在 package.json
 
 - [ ] 2. 建立安裝腳本的主程式架構
   - 2.1 建立 scripts 資料夾
   - 2.2 建立 install-config.js 檔案
-  - 2.3 引入必要的模組（shelljs、inquirer、os、path）
+  - 2.3 引入必要的模組（shelljs、os、path）
   - 2.4 建立主函數架構與錯誤處理包裝
+  - 2.5 實作命令列參數檢查（process.argv 檢查 --overwrite）
 
 - [ ] 3. 實作跨平台目標路徑處理
   - 3.1 使用 `process.platform` 偵測作業系統類型（'win32', 'darwin', 'linux'）
@@ -175,20 +153,19 @@ installConfig();
   - 3.4 使用 `path.join()` 建構跨平台相容的路徑
   - 3.5 確保路徑處理正確（ShellJS 自動處理路徑分隔符號）
 
-- [ ] 4. 實作檔案衝突檢查與使用者互動
+- [ ] 4. 實作檔案衝突檢查與參數處理
   - 4.1 使用 `shell.ls('commands/*.md')` 取得所有 .md 檔案清單
   - 4.2 使用 `shell.test('-f', targetPath)` 檢查每個檔案是否已存在
-  - 4.3 如果發現衝突，使用 inquirer.prompt() 詢問使用者是否覆蓋
+  - 4.3 如果發現衝突且沒有 --overwrite 參數，停止安裝並顯示衝突檔案
     ```javascript
-    const { overwrite } = await inquirer.prompt([{
-      type: 'confirm',
-      name: 'overwrite',
-      message: `發現以下檔案已存在：${conflicts.join(', ')}\n是否要覆蓋現有檔案？`,
-      default: false
-    }]);
+    if (conflicts.length > 0 && !hasOverwriteFlag) {
+      console.log(`❌ 發現以下檔案已存在：${conflicts.join(', ')}`);
+      console.log('使用 --overwrite 參數來覆蓋現有檔案：');
+      console.log('npm run install-config -- --overwrite');
+      process.exit(1);
+    }
     ```
-  - 4.4 處理使用者的選擇（覆蓋或取消）
-  - 4.5 提供清晰的衝突檔案清單顯示
+  - 4.4 提供清晰的衝突檔案清單和覆蓋指示
 
 - [ ] 5. 實作檔案複製與目錄管理
   - 5.1 使用 `shell.test('-d', targetDir)` 檢查目標目錄是否存在
@@ -198,7 +175,7 @@ installConfig();
     files.forEach(file => {
       shell.cp(path.join('commands', file), targetDir);
       if (shell.error()) {
-        console.error(`錯誤：無法複製 ${file}`);
+        console.error(`Error: Failed to copy ${file}`);
       }
     });
     ```
@@ -209,9 +186,12 @@ installConfig();
   - 6.1 編輯 package.json 的 scripts 區段，新增 "install-config": "node scripts/install-config.js"
   - 6.2 實作安裝成功的訊息顯示
     ```javascript
-    console.log(`✅ 安裝成功！已安裝 ${fileCount} 個檔案到 ${targetDir}`);
+    console.log(`✅ Installation successful! Installed ${files.length} files to ${targetDir}`);
+    if (conflicts.length > 0) {
+      console.log(`⚠️  Overwritten ${conflicts.length} existing files`);
+    }
     ```
-  - 6.3 顯示已安裝的檔案數量和路徑
+  - 6.3 顯示已安裝的檔案數量、路徑和覆蓋狀態
   - 6.4 實作錯誤訊息的友善顯示（捕捉例外並顯示清楚訊息）
   - 6.5 測試各種錯誤情況的處理（權限不足、路徑不存在等）
 
