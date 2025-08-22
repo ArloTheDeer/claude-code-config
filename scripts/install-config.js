@@ -44,7 +44,34 @@ function installConfig() {
       console.log(`⚠️  Will overwrite ${conflicts.length} existing files: ${conflicts.join(', ')}`);
     }
     
-    // TODO: Implement file copying and directory management
+    // Check and create target directory
+    if (!shell.test('-d', targetDir)) {
+      console.log(`📁 Creating directory: ${targetDir}`);
+      shell.mkdir('-p', targetDir);
+      if (shell.error()) {
+        throw new Error(`Failed to create directory: ${shell.error()}`);
+      }
+    }
+    
+    // Copy files to target directory
+    console.log('📋 Copying files...');
+    let successCount = 0;
+    let errorCount = 0;
+    
+    files.forEach(file => {
+      const filename = path.basename(file);
+      console.log(`  Copying ${filename}...`);
+      
+      shell.cp(file, targetDir);
+      if (shell.error()) {
+        console.error(`  ❌ Error: Failed to copy ${filename}`);
+        errorCount++;
+      } else {
+        console.log(`  ✅ Copied ${filename}`);
+        successCount++;
+      }
+    });
+    
     // TODO: Implement user feedback messages
     
     console.log('✅ Installation complete!');
