@@ -144,7 +144,7 @@ installConfig();
   - 2.4 建立主函數架構與錯誤處理包裝
   - 2.5 實作命令列參數檢查（process.argv 檢查 --overwrite）
 
-- [ ] 3. 實作跨平台目標路徑處理
+- [x] 3. 實作跨平台目標路徑處理
   - 3.1 使用 `process.platform` 偵測作業系統類型（'win32', 'darwin', 'linux'）
   - 3.2 根據作業系統設定正確的目標路徑
     - Windows: `path.join(os.homedir(), '.claude', 'commands')`

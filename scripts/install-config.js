@@ -11,7 +11,10 @@ function installConfig() {
     console.log(`Platform: ${process.platform}`);
     console.log(`Overwrite mode: ${hasOverwriteFlag ? 'enabled' : 'disabled'}`);
     
-    // TODO: Implement cross-platform target path handling
+    // Cross-platform target path handling
+    const targetDir = path.join(os.homedir(), '.claude', 'commands');
+    console.log(`Target directory: ${targetDir}`);
+    
     // TODO: Implement file conflict checking and parameter processing
     // TODO: Implement file copying and directory management
     // TODO: Implement user feedback messages
