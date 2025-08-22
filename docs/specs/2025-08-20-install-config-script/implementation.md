@@ -137,7 +137,7 @@ installConfig();
   - 1.2 使用 `npm install shelljs` 安裝跨平台檔案操作套件
   - 1.3 確認 shelljs 套件已安裝最新版本並記錄在 package.json
 
-- [ ] 2. 建立安裝腳本的主程式架構
+- [x] 2. 建立安裝腳本的主程式架構
   - 2.1 建立 scripts 資料夾
   - 2.2 建立 install-config.js 檔案
   - 2.3 引入必要的模組（shelljs、os、path）
