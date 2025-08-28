@@ -2,7 +2,7 @@
 
 ## 專案簡介
 
-這是一套為 Claude Code 和其他 AI 助理設計的標準化工作流程指令集，提供結構化的方法來處理軟體開發的各個階段，從需求研究、PRD 撰寫到實作任務管理。
+這是一套為 Claude Code 和其他 AI 助理設計的標準化工作流程指令集，提供結構化的方法來處理軟體開發的各個階段，從需求研究、PRD 撰寫到實作任務管理。本專案包含自動化安裝腳本，可以輕鬆將所有指令安裝到您的 Claude Code 環境中。
 
 本專案基於 [snarktank/ai-dev-tasks](https://github.com/snarktank/ai-dev-tasks) 的概念，並根據個人使用需求進行了客製化調整，特別針對繁體中文環境和 Claude Code 的特定功能進行了優化。
 
@@ -15,6 +15,12 @@ claude-config/
 │   ├── create-prd.md        # PRD 產生流程
 │   ├── create-impl-plan.md  # 實作計畫產生流程
 │   └── process-task-list.md # 任務清單管理流程
+├── scripts/                 # 安裝腳本
+│   └── install-config.js    # 自動安裝指令到 Claude Code
+├── docs/                    # 產出文件目錄
+│   ├── research/            # 研究文件
+│   └── specs/               # 產品規格文件
+├── package.json             # 專案配置
 └── README.md                # 本文件
 ```
 
@@ -73,6 +79,32 @@ claude-config/
 - Git 提交流程整合
 - 進度追蹤與報告
 
+## 安裝
+
+### 將指令安裝到 Claude Code
+
+本專案提供自動化腳本，可以將所有工作流程指令安裝到您的 Claude Code 配置目錄：
+
+```bash
+# 首次安裝或更新指令
+npm run install-config
+
+# 強制覆蓋現有指令（當指令已存在時）
+npm run install-config -- overwrite
+```
+
+**安裝位置：**
+- Windows: `C:\Users\[username]\.claude\commands`
+- macOS/Linux: `~/.claude/commands`
+
+**安裝的指令檔案：**
+- `research.md` - 研究與分析流程
+- `create-prd.md` - PRD 產生流程  
+- `create-impl-plan.md` - 實作計畫產生流程
+- `process-task-list.md` - 任務清單管理流程
+
+安裝完成後，您就可以在 Claude Code 中使用這些斜線指令，例如 `/research` 或 `/create-prd`。
+
 ## 使用流程
 
 ### 完整開發流程
@@ -87,6 +119,12 @@ graph LR
 ```
 
 ### 快速開始
+
+0. **安裝指令**（首次使用時）
+
+   ```bash
+   npm run install-config
+   ```
 
 1. **研究階段**（當需要深入了解問題時）
 

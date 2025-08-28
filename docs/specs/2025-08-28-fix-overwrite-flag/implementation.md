@@ -32,7 +32,13 @@
   - 2.3 消除 npm "Unknown cli config" 警告訊息
   - 2.4 確保 `--overwrite` 參數能正確設定 `hasOverwriteFlag` 變數
 
-- [ ] 3. 執行驗收測試
+- [x] 3. 執行驗收測試
   - 3.1 使用 AI 讀取 acceptance.feature 檔案
   - 3.2 透過終端指令執行每個場景
   - 3.3 驗證所有場景通過並記錄結果
+
+- [x] 4. 修改 README 文件
+  - 4.1 檢查 README.md 中關於 install-config 的說明
+  - 4.2 更新參數格式從 --overwrite 改為 overwrite
+  - 4.3 確保使用範例與最新版本一致
+  - 4.4 驗證文件內容準確性
