@@ -4,8 +4,8 @@ const os = require('os');
 
 function installConfig() {
   try {
-    // Check for --overwrite flag
-    const hasOverwriteFlag = process.argv.includes('--overwrite');
+    // Check for overwrite flag
+    const hasOverwriteFlag = process.argv.includes('overwrite');
     
     console.log('📦 Starting installation...');
     console.log(`Platform: ${process.platform}`);
@@ -35,8 +35,8 @@ function installConfig() {
     // If conflicts exist and no --overwrite flag, stop installation
     if (conflicts.length > 0 && !hasOverwriteFlag) {
       console.log(`❌ Found existing files: ${conflicts.join(', ')}`);
-      console.log('Use --overwrite flag to overwrite existing files:');
-      console.log('npm run install-config -- --overwrite');
+      console.log('Use overwrite flag to overwrite existing files:');
+      console.log('npm run install-config -- overwrite');
       process.exit(1);
     }
     
