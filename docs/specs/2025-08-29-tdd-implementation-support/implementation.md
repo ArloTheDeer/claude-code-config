@@ -14,27 +14,28 @@
 ## 相關檔案
 
 - `commands/create-impl-plan.md` - 需要修改的主要指令文件，在流程第 4 點增加 TDD 條件邏輯
+- `commands/create-impl-plan.spec.js` - create-impl-plan 指令的單元測試檔案
 - `acceptance.feature` - Gherkin 格式的驗收測試場景
 
 ## 任務
 
-- [ ] 1. 修改 create-impl-plan.md 流程第 4 點，增加 TDD 觸發邏輯
+- [x] 1. 修改 create-impl-plan.md 流程第 4 點，增加 TDD 觸發邏輯
   - 1.1 在流程第 4 點中加入檢測使用者提及「TDD」的邏輯
   - 1.2 當偵測到 TDD 需求時，引用新增的 TDD 流程章節
   - 1.3 確保未提及 TDD 時保持原有行為完全不變
 
-- [ ] 2. 在 create-impl-plan.md 末尾新增 TDD 實作流程指導章節
+- [x] 2. 在 create-impl-plan.md 末尾新增 TDD 實作流程指導章節
   - 2.1 建立完整的 TDD 流程說明，包含 8 個標準步驟
   - 2.2 詳細描述任務轉換邏輯（從傳統格式轉換為 TDD 格式）
   - 2.3 說明開發者確認機制的重要性和執行方式
   - 2.4 提供 describe/it 測試框架和 Error('Not implemented') 的使用範例
 
-- [ ] 3. 建立 TDD 任務模板和轉換規則
+- [x] 3. 建立 TDD 任務模板和轉換規則
   - 3.1 定義主要任務轉換為 TDD 循環的具體規則
   - 3.2 確保每個主要任務都包含完整的紅燈-綠燈循環
   - 3.3 保留原始實作要點在 TDD 流程的適當位置
 
-- [ ] 4. 實作開發者確認機制
+- [x] 4. 實作開發者確認機制
   - 4.1 在測試敘述步驟後明確要求開發者審核
   - 4.2 提供清楚的指導說明審核重點和標準
   - 4.3 確保 Claude Code 會在此步驟暫停等待確認
