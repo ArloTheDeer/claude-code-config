@@ -77,9 +77,17 @@ Claude Code 提供內建的 TodoWrite 工具來管理任務，這與 Cursor 等�
 
 5. **保持「相關檔案」的準確和最新。**
 
-6. **工作流程：**
+6. **TDD 任務處理：**
+   - 當任務標題包含「使用 tdd-developer agent 進行開發」標註時
+   - 使用 Task 工具啟動 tdd-developer agent 來處理該任務
+   - 將完整的任務內容（包括所有子任務）傳遞給 agent
+
+7. **工作流程：**
    - 開始工作前，從 TodoWrite 檢查下一個待處理任務
+   - 檢查任務是否標註需要使用 tdd-developer agent
    - 將任務標記為 `in_progress`
-   - 實作任務
+   - 根據任務類型選擇處理方式：
+     - 一般任務：直接實作
+     - TDD 標註任務：使用 tdd-developer agent
    - 完成後標記為 `completed` 並同步更新 `implementation.md`
    - 暫停等待用戶核准後再進行下一個任務
