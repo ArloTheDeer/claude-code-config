@@ -28,7 +28,7 @@
   - 1.4 更新任務識別邏輯，從檢測「使用 tdd-developer agent 進行開發」改為「使用 TDD 開發流程」
   - 1.5 確保語言設定保持一致（代碼和註解用英文，討論用繁體中文）
 
-- [ ] 2. 更新 create-impl-plan.md 的標註格式
+- [x] 2. 更新 create-impl-plan.md 的標註格式
   - 2.1 將第 26 行的建議文字從「使用 tdd-developer agent」改為「使用 TDD 開發流程」
   - 2.2 更新第 141 行的 TDD 開發標註說明
   - 2.3 將範例中的標註格式（第 144、153 行）從「使用 tdd-developer agent 進行開發」改為「使用 TDD 開發流程」
