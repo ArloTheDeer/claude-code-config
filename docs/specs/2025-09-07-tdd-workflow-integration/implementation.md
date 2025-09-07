@@ -39,7 +39,7 @@
   - 3.2 搜尋並更新其他可能存在的 tdd-developer agent 引用
   - 3.3 確保所有文檔描述與新的整合架構一致
 
-- [ ] 4. 移除 tdd-developer agent 檔案
+- [x] 4. 移除 tdd-developer agent 檔案
   - 4.1 備份 agents/tdd-developer.md 的內容（已整合到 process-task-list.md）
   - 4.2 刪除 agents/tdd-developer.md 檔案
   - 4.3 確認移除後不會影響其他系統功能
