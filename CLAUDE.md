@@ -17,8 +17,8 @@ The project follows a modular workflow system with four main components:
 - **process-task-list.md**: Task list management and tracking
 
 ### 2. Agents System (`/agents/`)
-- **tdd-developer.md**: Specialized TDD (Test-Driven Development) agent configuration
-- Agents follow strict red-green-refactor cycles for new functionality implementation
+- Agent system supports specialized development methodologies
+- Future agents can be added for specific development approaches
 
 ### 3. Installation System (`/scripts/`)
 - **install-config.js**: Automated installation to `~/.claude/commands` and `~/.claude/agents`
@@ -61,9 +61,10 @@ npm run install-config -- overwrite
 - Output: Implementation markdown + Gherkin acceptance tests
 - Integrates with Claude Code's TodoWrite tool
 
-### 4. TDD Agent Integration
-- Use `tdd-developer` agent for new functionality requiring TDD approach
-- Enforces strict red-green-refactor cycles
+### 4. TDD Development Integration
+- Use "使用 TDD 開發流程" annotation in implementation tasks
+- TDD workflow integrated directly into process-task-list command
+- Enforces strict red-green-refactor cycles within main context
 - Never implements logic before tests are written
 
 ## File Naming Conventions
@@ -109,4 +110,5 @@ All workflow commands automatically adapt to user's conversation language:
 - The installation script uses shelljs for cross-platform compatibility
 - File conflict detection prevents accidental overwrites
 - Modular command structure allows independent updates
+- Integrated TDD workflow provides seamless test-driven development
 - Agent system supports specialized development methodologies
