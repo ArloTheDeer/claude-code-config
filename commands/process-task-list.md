@@ -116,6 +116,51 @@ Claude Code 提供內建的 TodoWrite 工具來管理任務，這與 Cursor 等�
 ### 關鍵規則
 
 - **絕不** 撰寫期望「Not implemented」錯誤的測試邏輯
+
+### 範例：正確 vs 錯誤的測試方法
+
+#### 錯誤的測試方法 ❌
+```typescript
+// 空實現函數
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  throw new Error('Not implemented')
+}
+
+// 錯誤的測試 - 直接期望 "Not implemented" 錯誤
+it('returns all available note paths as static params', async () => {
+  await expect(generateStaticParams()).rejects.toThrow('Not implemented')
+})
+```
+
+#### 正確的測試方法 ✅
+```typescript
+// 空實現函數 (相同的起點)
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  throw new Error('Not implemented')
+}
+
+// 正確的測試 - 測試預期的行為，不是現在的錯誤狀態
+it('returns all available note paths as static params', async () => {
+  // Mock 檔案系統或數據源
+  const mockNotes = ['note1.md', 'note2.md', 'note3.md']
+  jest.spyOn(fs, 'readdir').mockResolvedValue(mockNotes)
+
+  const result = await generateStaticParams()
+  
+  expect(result).toEqual([
+    { slug: 'note1' },
+    { slug: 'note2' },
+    { slug: 'note3' }
+  ])
+  expect(result).toHaveLength(3)
+})
+```
+
+**關鍵差異：**
+- 錯誤方法測試目前的實現狀態（拋出錯誤）
+- 正確方法測試我們想要的最終行為（返回 note paths）
+- 正確方法在紅燈階段會失敗，因為函數還沒實現預期邏輯
+- 正確方法指導我們需要實現什麼功能來讓測試通過
 - **絕不** 撰寫沒有真實實現就保證通過的測試
 - **絕不** 在撰寫測試之前實現實際邏輯
 - 初期專注於主流程和主要錯誤情況，而非全面覆蓋
