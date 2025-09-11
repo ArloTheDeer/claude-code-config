@@ -1,95 +1,108 @@
-# Claude Config - AI 助理工作流程指令集
+# Claude Code Config - 規格導向開發流程
 
-## 專案簡介
+一套專注於規格導向開發的 Claude Code 工作流程命令集，透過結構化的三步驟流程，從需求澄清到完整實作，確保開發過程清晰可追蹤。
 
-這是一套為 Claude Code 和其他 AI 助理設計的標準化工作流程指令集，提供結構化的方法來處理軟體開發的各個階段，從需求研究、PRD 撰寫到實作任務管理。本專案包含自動化安裝腳本，可以輕鬆將所有指令安裝到您的 Claude Code 環境中。
+## 🎯 核心理念
 
-本專案基於 [snarktank/ai-dev-tasks](https://github.com/snarktank/ai-dev-tasks) 的概念，並根據個人使用需求進行了客製化調整，特別針對繁體中文環境和 Claude Code 的特定功能進行了優化。
+**從想法到實作的完整流程：** 透過 PRD (產品需求文件) 驅動開發，確保每個功能都有清晰的需求定義、完整的實作計畫，以及可執行的驗收標準。
 
-## 目錄結構
+## 🚀 核心工作流程
 
-```
-claude-config/
-├── commands/                 # 工作流程指令文件
-│   ├── research.md          # 研究與分析流程
-│   ├── create-prd.md        # PRD 產生流程
-│   ├── create-impl-plan.md  # 實作計畫產生流程
-│   └── process-task-list.md # 任務清單管理流程
-├── scripts/                 # 安裝腳本
-│   └── install-config.js    # 自動安裝指令到 Claude Code
-├── docs/                    # 產出文件目錄
-│   ├── research/            # 研究文件
-│   └── specs/               # 產品規格文件
-├── package.json             # 專案配置
-└── README.md                # 本文件
-```
+### 三步驟開發流程
 
-## 核心工作流程
+這套工作流程從模糊的功能想法開始，透過結構化的方法逐步細化為可執行的實作任務：
 
-### 1. 研究與分析 (`research.md`)
+**第一步：需求澄清** - 當你有一個功能想法時，使用 `/create-prd` 讓 AI 透過互動問答幫助你釐清需求細節，最終產生清晰完整的產品需求文件 (PRD)。
 
-進行深入的問題研究和分析，為後續的 PRD 撰寫和實作提供基礎。
+**第二步：實作規劃** - 有了明確的 PRD 後，使用 `/create-impl-plan` 讓 AI 分析你的程式碼架構，將 PRD 拆解成 5-7 個具體的實作任務，並生成對應的驗收測試場景。
 
-**主要功能：**
+**第三步：任務執行** - 透過 `/process-task-list` 逐一執行實作任務。每完成一個任務會自動 git commit，並詢問是否繼續下一個任務。對於複雜的長期專案，你可以多次執行此命令來分階段完成所有任務。
 
-- 問題背景調查
-- 程式碼庫分析
-- 外部最佳實踐研究
-- 解決方案評估與建議
+這個流程的核心價值在於確保每個功能都經過充分的需求分析，有明確的實作計畫，並且執行過程可追蹤、可中斷、可恢復。
 
-**輸出：** `docs/research/[date]-[topic].md`
+### 1️⃣ `/create-prd` - 需求澄清與 PRD 生成
 
-### 2. 產品需求文件 (`create-prd.md`)
+**用途：** 將模糊的功能需求轉化為清晰的產品需求文件
 
-基於研究結果或使用者需求，產生詳細的產品需求文件。
-
-**主要功能：**
-
-- 澄清需求細節
-- 定義功能範圍
-- 撰寫使用者故事
-- 設定驗收標準
+**流程：**
+- 接收功能描述（如：「我要開發一個 Obsidian 筆記可以直接發布在靜態網站的網站」）
+- AI 主動詢問澄清問題，促使開發者深入思考
+- 基於問答結果生成完整 PRD 文件
 
 **輸出：** `docs/specs/[date]-[feature-name]/prd.md`
 
-### 3. 實作計畫 (`create-impl-plan.md`)
+**範例互動：**
+```
+開發者：「我想要一個筆記發布系統」
+AI：「這個系統主要解決什麼問題？目標用戶是誰？需要支援哪些筆記格式？...」
+```
 
-將 PRD 轉換為可執行的開發任務清單和驗收測試。
+### 2️⃣ `/create-impl-plan` - 實作計畫制定
 
-**主要功能：**
+**用途：** 讀取 PRD，分析專案架構，制定詳細的實作任務清單
 
-- 分析 PRD 需求
-- 評估現有程式碼
-- 產生詳細任務清單
-- 建立 Gherkin 格式驗收測試
+**流程：**
+- 讀取並分析 PRD 內容
+- 檢視現有程式碼架構和慣例
+- 生成 5-7 個主要實作任務，每個任務包含詳細的實作要點
+- 支援 TDD 開發標記（開發者提及「TDD」時自動標註「使用 TDD 開發流程」）
+- 自動生成 Gherkin 格式的驗收測試場景
+- 最後一個任務固定為驗收測試
 
 **輸出：**
+- `docs/specs/[prd-slug]/implementation.md` - 任務清單
+- `docs/specs/[prd-slug]/acceptance.feature` - 驗收測試場景
 
-- `docs/specs/[prd-slug-name]/implementation.md` - 任務清單
-- `docs/specs/[prd-slug-name]/acceptance.feature` - 驗收測試
+### 3️⃣ `/process-task-list` - 任務執行與管理
 
-### 4. 任務管理 (`process-task-list.md`)
+**用途：** 逐一執行實作計畫中的每個任務，支援分階段完成長期開發流程
 
-管理和追蹤實作任務的完成進度。
+**執行模式：**
+- **單任務執行：** 每次執行完成一個任務後會暫停，等待開發者確認是否繼續
+- **多次執行：** 可以重複執行此命令來處理剩餘任務，適合長期開發流程
+- **彈性管理：** 對話過長時可選擇使用 `/compact` 精簡對話或 `/clear` 重新開始
 
-**主要功能：**
+**功能特色：**
+- **任務追蹤：** 與 Claude Code 的 TodoWrite 工具整合，即時追蹤進度
+- **TDD 支援：** 檢測到「使用 TDD 開發流程」標記時，自動展開為 7 個 TDD 子任務：
+  1. 先跑測試
+  2. 確認介面修改需求（支援新增/修改/純邏輯修正三種情況）
+  3. 寫測試敘述
+  4. 實作測試邏輯
+  5. 跑測試（紅燈階段）
+  6. 實作實際程式碼
+  7. 再次跑測試（綠燈階段）
+- **驗收測試：** 遇到驗收測試任務時，啟用專門的 acceptance-tester subagent
+- **Git 整合：** 每完成一個任務自動執行 git commit
+- **狀態持久化：** 任務狀態保存在 `implementation.md` 中，支援跨對話追蹤
 
-- Claude Code TodoWrite 工具整合
-- 任務狀態同步管理
-- Git 提交流程整合
-- 進度追蹤與報告
+## 🔍 輔助功能
 
-## 安裝
+### `/research` - 研究與調查
 
-### 將指令安裝到 Claude Code
+**用途：** 在還未確定實作方向時，進行深度研究和分析
 
-本專案提供自動化腳本，可以將所有工作流程指令安裝到您的 Claude Code 配置目錄：
+**適用場景：**
+- 技術選型調研
+- 問題根因分析  
+- 架構設計評估
+- 最佳實踐研究
+
+**輸出：** `docs/research/[date]-[topic].md`
+
+**與主流程整合：** 研究結果可作為後續 PRD 撰寫的參考依據
+
+## 📦 快速開始
+
+### 安裝
+
+將所有命令安裝到 Claude Code 環境：
 
 ```bash
-# 首次安裝或更新指令
+# 首次安裝
 npm run install-config
 
-# 強制覆蓋現有指令（當指令已存在時）
+# 強制覆蓋現有命令（注意 -- 和 overwrite 之間需要空格）
 npm run install-config -- overwrite
 ```
 
@@ -97,108 +110,75 @@ npm run install-config -- overwrite
 - Windows: `C:\Users\[username]\.claude\commands`
 - macOS/Linux: `~/.claude/commands`
 
-**安裝的指令檔案：**
-- `research.md` - 研究與分析流程
-- `create-prd.md` - PRD 產生流程  
-- `create-impl-plan.md` - 實作計畫產生流程
-- `process-task-list.md` - 任務清單管理流程
+### 使用範例
 
-安裝完成後，您就可以在 Claude Code 中使用這些斜線指令，例如 `/research` 或 `/create-prd`。
+**完整開發流程：**
 
-## 使用流程
-
-### 完整開發流程
-
-```mermaid
-graph LR
-    A[使用者需求] --> B[研究分析]
-    B --> C[撰寫 PRD]
-    C --> D[產生實作計畫]
-    D --> E[執行任務]
-    E --> F[驗收測試]
-```
-
-### 快速開始
-
-0. **安裝指令**（首次使用時）
-
-   ```bash
-   npm run install-config
+1. **需求澄清**
+   ```
+   /create-prd
+   我想開發一個部落格文章管理系統
    ```
 
-1. **研究階段**（當需要深入了解問題時）
-
+2. **制定計畫**
    ```
-   請參考 commands/research.md 進行問題研究
-   ```
-
-2. **需求定義**
-
-   ```
-   請參考 commands/create-prd.md 產生 PRD
+   /create-impl-plan
+   請基於剛才生成的 PRD 制定實作計畫，使用 TDD 開發
    ```
 
-3. **實作規劃**
-
+3. **執行開發**
    ```
-   請參考 commands/create-impl-plan.md 從 PRD 產生任務清單
+   /process-task-list
+   開始執行實作任務
+   
+   # 完成一個任務後，可以：
+   # - 繼續下一個任務
+   # - 稍後重新執行 /process-task-list 繼續剩餘任務
+   # - 對話過長時可使用 /compact 或 /clear（可選）
    ```
 
-4. **任務執行**
-   ```
-   請參考 commands/process-task-list.md 處理實作任務
-   ```
-
-## 特色功能
-
-### Claude Code 專屬優化
-
-- **TodoWrite 工具整合**：自動同步內部任務清單與 Markdown 文件
-- **雙向任務同步**：確保任務狀態在不同介面間保持一致
-- **智慧提交管理**：整合 Git 工作流程，自動產生語義化提交訊息
-
-### 多語言支援
-
-所有文件產出都會根據使用者的對話語言自動調整：
-
-- 中文對話 → 繁體中文文件
-- 英文對話 → 英文文件
-
-### 驗收測試自動化
-
-- 使用 Gherkin 格式定義驗收條件
-- AI 可直接執行測試場景
-- 支援終端指令和 MCP 瀏覽器操作
-
-## 檔案輸出結構
-
-專案執行後會產生以下結構的文件：
+## 🏗️ 專案架構
 
 ```
-docs/
-├── research/                        # 研究文件
-│   └── [date]-[topic].md
-└── specs/                          # 產品規格文件
-    └── [date]-[feature-name]/
-        ├── prd.md                  # PRD 文件
-        ├── implementation.md       # 實作任務清單
-        └── acceptance.feature      # 驗收測試場景
+claude-code-config/
+├── commands/                   # 核心命令
+│   ├── create-prd.md          # PRD 生成流程
+│   ├── create-impl-plan.md    # 實作計畫流程  
+│   ├── process-task-list.md   # 任務執行流程
+│   └── research.md            # 研究分析流程
+├── scripts/
+│   └── install-config.js      # 安裝腳本
+├── docs/                      # 輸出目錄
+│   ├── research/              # 研究文件
+│   │   └── [date]-[topic].md
+│   └── specs/                 # 產品規格
+│       └── [date]-[feature]/
+│           ├── prd.md
+│           ├── implementation.md
+│           └── acceptance.feature
+└── README.md
 ```
 
-## 最佳實踐
+## ✨ 核心特色
 
-1. **循序漸進**：依照研究 → PRD → 實作的順序進行
-2. **充分澄清**：在每個階段都要詢問釐清問題
-3. **持續同步**：保持任務狀態即時更新
-4. **版本控制**：每完成一個任務就進行 Git 提交
-5. **文件為先**：所有決策和進度都要記錄在文件中
+- **🎯 規格導向開發：** 透過 PRD 驅動整個開發流程，確保需求清晰可追蹤
+- **🛠️ Claude Code 整合：** 與 TodoWrite 同步任務狀態，自動化 Git 提交流程
+- **🧪 TDD & 驗收測試：** 自動展開 TDD 子任務，支援 Gherkin 格式驗收測試
 
-## 適用對象
+## 🎨 適用場景
 
-- 使用 Claude Code 的開發者
-- 需要結構化開發流程的團隊
-- 希望標準化 AI 助理工作方式的組織
+適合重視開發流程規範、需要清晰需求文件、實踐 TDD 開發方法論的個人開發者或團隊專案。
 
-## 授權
+## 📋 最佳實踐
 
-本專案採用 Apache 授權條款。
+1. **循序執行** PRD → 實作計畫 → 任務執行的完整流程
+2. **充分澄清** 在 PRD 階段確保需求清晰無歧義  
+3. **持續同步** 保持任務狀態即時更新並定期提交
+
+## 🤝 貢獻與回饋
+
+本專案基於 [snarktank/ai-dev-tasks](https://github.com/snarktank/ai-dev-tasks) 的概念，針對 Claude Code 和繁體中文環境進行了深度客製化。
+
+## 📄 授權
+
+本專案採用 Apache 2.0 授權條款。
