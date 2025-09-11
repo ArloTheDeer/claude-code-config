@@ -154,9 +154,16 @@ Claude Code 提供內建的 TodoWrite 工具來管理任務，這與 Cursor 等�
    - 檢測「使用 TDD 開發流程」標註，自動分解為 7 個子任務（詳見「TDD 任務自動分解機制」章節）
    - 按順序執行子任務，遵循 TDD 工作流程（詳見「TDD 開發流程」章節）
 
-7. **工作流程：**
-   - 檢查下一個待處理任務，識別是否為 TDD 任務
-   - 將任務標記為 `in_progress`（TDD 任務將自動分解）
+7. **驗收測試任務處理：**
+   - 檢測任務標題或描述中包含以下關鍵詞的任務：
+     - 「驗收測試」、「acceptance testing」、「驗收」、「validate implementation」
+     - 「執行驗收測試」、「進行驗收」、「驗證實作」等相關詞彙
+   - 當遇到驗收測試任務時，必須使用 Task tool 啟用 acceptance-tester agent
+   - 驗收測試任務應由 acceptance-tester agent 專門處理，不要在主對話中直接執行
+
+8. **工作流程：**
+   - 檢查下一個待處理任務，識別是否為 TDD 任務或驗收測試任務
+   - 將任務標記為 `in_progress`（TDD 任務將自動分解，驗收測試任務啟用專門 agent）
    - 完成後標記為 `completed` 並同步更新 `implementation.md`
    - 等待用戶核准後再進行下一個任務
 
