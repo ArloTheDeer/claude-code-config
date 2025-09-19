@@ -134,6 +134,9 @@ Claude Code 提供內建的 TodoWrite 工具來管理任務，這與 Cursor 等�
 
 1. **首次載入任務：**
    - 讀取 `implementation.md` 檔案
+   - 讀取 PRD 文件（從 `implementation.md` 中的「PRD 文件路徑」欄位取得路徑）
+   - 讀取 `acceptance.feature` 檔案以了解驗收標準和大局觀點
+   - 若 PRD 中引用了研究文件，一併讀取相關研究文件以獲得完整背景資訊
    - 使用 TodoWrite 工具將任務清單轉換為內部任務格式
    - 保持任務 ID 與原始清單的對應關係
 
@@ -163,6 +166,19 @@ Claude Code 提供內建的 TodoWrite 工具來管理任務，這與 Cursor 等�
      - 「驗收測試」、「acceptance testing」、「驗收」、「validate implementation」
      - 「執行驗收測試」、「進行驗收」、「驗證實作」等相關詞彙
    - 當遇到驗收測試任務時，必須使用 Task tool 啟用 acceptance-tester agent
+   - Task tool 的 prompt 參數必須包含以下三個文件的相對路徑（基於專案根目錄）：
+     - `docs/specs/[專案目錄]/implementation.md`
+     - `docs/specs/[專案目錄]/acceptance.feature`
+     - `docs/specs/[專案目錄]/prd.md`
+   - 範例 prompt 格式：
+     ```
+     請讀取 acceptance.feature 檔案、implementation.md 檔案和 prd.md 檔案，並執行所有 Gherkin 場景。
+
+     檔案路徑：
+     - implementation.md: docs/specs/2025-09-19-example-feature/implementation.md
+     - acceptance.feature: docs/specs/2025-09-19-example-feature/acceptance.feature
+     - prd.md: docs/specs/2025-09-19-example-feature/prd.md
+     ```
    - 驗收測試任務應由 acceptance-tester agent 專門處理，不要在主對話中直接執行
 
 8. **工作流程：**
