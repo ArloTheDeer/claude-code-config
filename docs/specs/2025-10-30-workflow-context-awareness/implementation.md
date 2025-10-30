@@ -49,7 +49,7 @@
   - 4.3 明確說明 PRD 讀者是產品經理和業務人員，技術細節會在 implementation.md 階段被保留
   - 4.4 說明 `/create-impl-plan` 會自動從 research 提取技術細節到「實作參考資訊」章節
 
-- [ ] 5. 更新 CLAUDE.md，記錄此次改進
+- [x] 5. 更新 CLAUDE.md，記錄此次改進
   - 5.1 在 Core Architecture 或適當章節中，新增關於「工作流程脈絡」的說明
   - 5.2 說明各指令現在都包含對整體工作流程的認知
   - 5.3 強調職責分離原則：PRD 專注商業需求、implementation.md 承接技術細節、process-task-list 執行實作
