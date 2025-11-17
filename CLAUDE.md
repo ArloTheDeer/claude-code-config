@@ -22,14 +22,15 @@ The project follows a three-step specification-driven workflow:
 ### Step 2: Implementation Planning (`/create-impl-plan`)
 - Analyze PRD and existing codebase architecture
 - Generate 5-7 specific implementation tasks with detailed implementation points
-- Automatic TDD annotation support and Gherkin acceptance test generation
+- Generate "Completion Checks" for each task with executable verification methods
+- Automatic Gherkin acceptance test generation
 - Output: `implementation.md` + `acceptance.feature`
 - Target audience: Developers (junior to intermediate)
 - **Enhanced Feature**: Implementation reference information extraction from research and PRD files
 
 ### Step 3: Task Execution (`/process-task-list`)
 - Execute implementation tasks one by one with automatic git commits
-- TDD workflow auto-expansion (7 sub-tasks for red-green-refactor cycle)
+- Execute "Completion Checks" after each task to verify implementation
 - Acceptance testing integration with specialized acceptance-tester agent
 - Support for multi-session execution for long-term development
 - Reference documents: implementation.md, PRD, acceptance.feature, research (if available)
@@ -91,21 +92,9 @@ npm run install-config -- overwrite
 - Use `/create-impl-plan` to convert PRD to actionable tasks
 - Output: Implementation markdown + Gherkin acceptance tests
 - Integrates with Claude Code's TodoWrite tool
+- Each task includes "Completion Checks" for verification
 
-### 4. TDD Development Integration
-- Use "使用 TDD 開發流程" annotation in implementation tasks
-- Automatic expansion into 7 TDD sub-tasks:
-  1. Run existing tests first
-  2. Confirm interface modification requirements (new/modify/logic-only)
-  3. Write test descriptions
-  4. Implement test logic
-  5. Run tests (red phase)
-  6. Implement actual code
-  7. Run tests again (green phase)
-- Enforces strict red-green-refactor cycles within main context
-- Never implements logic before tests are written
-
-### 5. Acceptance Testing Integration
+### 4. Acceptance Testing Integration
 - Automatic detection of acceptance testing tasks
 - Launches specialized acceptance-tester agent with complete file context
 - Executes Gherkin scenarios through commands and browser automation
@@ -134,8 +123,8 @@ All workflow commands automatically adapt to user's conversation language:
 ### Claude Code TodoWrite Tool
 - Task synchronization between internal lists and markdown files
 - Bi-directional task state management with persistent storage
-- TDD task auto-expansion with 7 sub-tasks management
 - Git workflow integration with semantic commit messages
+- Completion check execution after each task
 
 ### Testing Framework
 - Gherkin format acceptance criteria with Traditional Chinese support
@@ -164,7 +153,7 @@ All workflow commands automatically adapt to user's conversation language:
    - Implementation.md: Detailed technical extraction in "Implementation Reference" section
 6. **Continuous Sync**: Keep task states updated in real-time with TodoWrite integration
 7. **Version Control**: Automatic git commit after each completed task with semantic messages
-8. **TDD When Applicable**: Use TDD annotation for complex logic implementation
+8. **Completion Checks**: Execute verification methods after each task to ensure quality
 9. **Comprehensive Testing**: Complete acceptance testing with full context awareness
 
 ## Technical Considerations
@@ -172,7 +161,7 @@ All workflow commands automatically adapt to user's conversation language:
 - Cross-platform installation script using shelljs
 - File conflict detection prevents accidental overwrites
 - Modular command structure allows independent updates
-- Integrated TDD workflow with automatic task expansion
+- Completion check integration with multiple verification methods (unit tests, MCP tools, commands)
 - Acceptance-tester agent integration for comprehensive validation
 - Implementation context preservation across research → PRD → implementation phases
 - Support for both research-driven and direct PRD development approaches
