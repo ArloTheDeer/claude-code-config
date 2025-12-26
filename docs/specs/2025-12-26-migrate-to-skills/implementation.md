@@ -9,7 +9,7 @@
 
 - [x] 建立 Skills 目錄結構和基礎 SKILL.md
 - [x] 遷移 research 和 create-prd Skills
-- [ ] 遷移並拆分 create-impl-plan Skill
+- [x] 遷移並拆分 create-impl-plan Skill
 - [ ] 遷移並拆分 process-task-list Skill
 - [ ] 遷移 acceptance-test Skill
 - [ ] 更新安裝腳本支援 Skills
@@ -99,7 +99,13 @@
 - 確認內容完整未遺失（總行數約等於原始 418 行）
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+[技術決策] 採用英文 frontmatter + 中文主體內容策略，讓 Claude Code 能正確識別 skill 調用時機，同時保留中文內容便於維護者理解。
+
+[技術決策] 驗收測試視角調整：原設計為「使用者視角為主，避免開發者視角」，經討論改為「使用者視角為主，開發者視角輔助」。允許在 UI 操作後用 supabase mcp 等工具確認資料正確儲存，實現更完整的端對端驗證。
+
+[技術決策] 輸入來源彈性化：支援三種流程（Research + PRD、只有 PRD、只有 Research），來源文件參考章節和實作參考資訊章節都改為可選結構。
+
+SKILL.md 153 行（目標 < 200 行），拆分出三個參考檔案。
 
 ---
 
