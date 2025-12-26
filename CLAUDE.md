@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a specification-driven development workflow command set designed for Claude Code and other AI assistants. The project provides a structured three-step methodology: from requirement clarification to complete implementation, ensuring the development process is clear and traceable through PRD (Product Requirements Document) driven development.
+This is a specification-driven development workflow skill set designed for Claude Code and other AI assistants. The project provides a structured three-step methodology: from requirement clarification to complete implementation, ensuring the development process is clear and traceable through PRD (Product Requirements Document) driven development.
 
 The core value lies in ensuring every feature goes through thorough requirement analysis, has clear implementation plans, and maintains a trackable, interruptible, and resumable execution process.
 
@@ -31,7 +31,7 @@ The project follows a three-step specification-driven workflow:
 ### Step 3: Task Execution (`/process-task-list`)
 - Execute implementation tasks one by one with automatic git commits
 - Execute "Completion Checks" after each task to verify implementation
-- Acceptance testing integration with specialized acceptance-tester agent
+- Acceptance testing integration with specialized acceptance-test skill
 - Support for multi-session execution for long-term development
 - Reference documents: implementation.md, PRD, acceptance.feature, research (if available)
 
@@ -52,9 +52,22 @@ This design ensures:
 
 ### Supporting Components
 
+#### Skills Directory (`/skills/`)
+- **research/**: Research and investigation skill with examples
+- **create-prd/**: PRD generation skill with examples
+- **create-impl-plan/**: Implementation planning skill with reference guides
+- **process-task-list/**: Task execution skill with implementation notes guide
+- **acceptance-test/**: Acceptance testing skill
+
+Each skill follows the Claude Code Skills format with:
+- `SKILL.md`: Main skill definition with frontmatter (name, description)
+- `references/`: Reference guides and documentation (optional)
+- `examples/`: Example files (optional)
+
 #### Installation System (`/scripts/`)
-- **install-config.js**: Automated installation to `~/.claude/commands`
+- **install-config.js**: Automated installation to `~/.claude/skills`
 - Cross-platform compatibility and conflict detection
+- Automatic cleanup of legacy commands and agents
 
 #### Documentation Output (`/docs/`)
 - **research/**: Research documents (optional auxiliary feature)
@@ -64,10 +77,10 @@ This design ensures:
 
 ### Development Setup
 ```bash
-# Install workflow commands to Claude Code
+# Install workflow skills to Claude Code
 npm run install-config
 
-# Force overwrite existing commands
+# Force overwrite existing skills
 npm run install-config -- overwrite
 ```
 
@@ -96,7 +109,7 @@ npm run install-config -- overwrite
 
 ### 4. Acceptance Testing Integration
 - Automatic detection of acceptance testing tasks
-- Launches specialized acceptance-tester agent with complete file context
+- Launches specialized acceptance-test skill with complete file context
 - Executes Gherkin scenarios through commands and browser automation
 - Receives implementation.md, acceptance.feature, and prd.md for comprehensive testing
 
@@ -108,12 +121,12 @@ npm run install-config -- overwrite
 
 ## Installation Locations
 
-- **Windows**: `C:\Users\[username]\.claude\commands` and `C:\Users\[username]\.claude\agents`
-- **macOS/Linux**: `~/.claude/commands` and `~/.claude/agents`
+- **Windows**: `C:\Users\[username]\.claude\skills`
+- **macOS/Linux**: `~/.claude/skills`
 
 ## Language Support
 
-All workflow commands automatically adapt to user's conversation language:
+All workflow skills automatically adapt to user's conversation language:
 - Chinese conversations → Traditional Chinese documentation
 - English conversations → English documentation
 - Code, comments, and git commit messages always in English
@@ -130,7 +143,7 @@ All workflow commands automatically adapt to user's conversation language:
 - Gherkin format acceptance criteria with Traditional Chinese support
 - Support for both terminal commands and browser automation
 - AI-executable test scenarios with comprehensive file context
-- Acceptance-tester agent integration for systematic validation
+- Acceptance-test skill integration for systematic validation
 
 ### Implementation Context Transfer Enhancement
 - Automatic extraction of implementation-related technical information from research and PRD files
@@ -159,10 +172,12 @@ All workflow commands automatically adapt to user's conversation language:
 ## Technical Considerations
 
 - Cross-platform installation script using shelljs
+- Directory-based skill structure with SKILL.md frontmatter
 - File conflict detection prevents accidental overwrites
-- Modular command structure allows independent updates
+- Modular skill structure allows independent updates
 - Completion check integration with multiple verification methods (unit tests, MCP tools, commands)
-- Acceptance-tester agent integration for comprehensive validation
+- Acceptance-test skill integration for comprehensive validation
 - Implementation context preservation across research → PRD → implementation phases
 - Support for both research-driven and direct PRD development approaches
 - Relative path handling for cross-platform compatibility
+- Automatic cleanup of legacy commands and agents during installation
