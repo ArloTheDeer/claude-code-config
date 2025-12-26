@@ -11,7 +11,7 @@
 - [x] 遷移 research 和 create-prd Skills
 - [x] 遷移並拆分 create-impl-plan Skill
 - [x] 遷移並拆分 process-task-list Skill
-- [ ] 遷移 acceptance-test Skill
+- [x] 遷移 acceptance-test Skill
 - [ ] 更新安裝腳本支援 Skills
 - [ ] 清理舊的 commands 和 agents 目錄
 - [ ] 執行驗收測試
@@ -153,7 +153,7 @@ SKILL.md 153 行（目標 < 200 行），拆分出三個參考檔案。
 - 確認驗收測試執行邏輯完整保留
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+照預期開發。移除 agent 專用欄位（model、color），保留核心驗收測試邏輯。新增中文關鍵詞到 description（驗收測試、驗收、驗證實作）。新增「輸入來源」章節說明三種流程的彈性（Research + PRD、只有 PRD、只有 Research），與其他 skills 保持一致。
 
 ---
 
