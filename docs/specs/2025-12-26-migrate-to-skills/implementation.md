@@ -10,7 +10,7 @@
 - [x] 建立 Skills 目錄結構和基礎 SKILL.md
 - [x] 遷移 research 和 create-prd Skills
 - [x] 遷移並拆分 create-impl-plan Skill
-- [ ] 遷移並拆分 process-task-list Skill
+- [x] 遷移並拆分 process-task-list Skill
 - [ ] 遷移 acceptance-test Skill
 - [ ] 更新安裝腳本支援 Skills
 - [ ] 清理舊的 commands 和 agents 目錄
@@ -129,7 +129,7 @@ SKILL.md 153 行（目標 < 200 行），拆分出三個參考檔案。
 - 確認原有功能完整保留
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+照預期開發。SKILL.md 為 244 行，拆分出 references/implementation-notes-guide.md（83 行）存放實作備註品質指引。沿用前一任務的 frontmatter 策略（英文 description + 中文主體內容）。新增三種流程的彈性說明（Research + PRD、只有 PRD、只有 Research），與 create-impl-plan 保持一致。
 
 ---
 
