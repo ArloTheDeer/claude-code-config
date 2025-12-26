@@ -36,7 +36,7 @@ description: |
 3. **只有 Research**：技術導向任務，從研究結論直接產出實作計畫
 
 **輸出目標**：
-- Implementation.md（任務清單和實作要點）
+- implementation.md（任務清單和實作要點）
 - acceptance.feature（Gherkin 格式驗收測試）
 - 目標讀者：**開發者（初級到中級）**
 - 閱讀目的：理解實作任務、技術細節、驗收標準
@@ -63,7 +63,7 @@ description: |
 - 這個階段是技術細節的「承接點」，確保前期的技術討論不會遺失
 
 **為下游階段準備**：
-- Implementation.md 會被 `/process-task-list` 讀取，用來執行任務
+- implementation.md 會被 `/process-task-list` 讀取，用來執行任務
 - 開發者會在執行任務時參考「實作參考資訊」章節
 - Acceptance.feature 會在驗收測試階段被執行
 

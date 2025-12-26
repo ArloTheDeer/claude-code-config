@@ -24,7 +24,7 @@ description: |
 ### 當前階段的輸入與輸出
 
 **輸入來源**（至少需要 PRD 或 Research 其中之一）：
-- **Implementation.md**：任務清單和實作要點（必需）
+- **implementation.md**：任務清單和實作要點（必需）
 - **acceptance.feature**：驗收測試場景（必需）
 - **PRD 文件**：功能背景和商業需求（產品導向任務）
 - **Research 文件**：技術分析和解決方案（技術導向任務）
