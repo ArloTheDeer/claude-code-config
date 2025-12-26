@@ -12,7 +12,7 @@
 - [x] 遷移並拆分 create-impl-plan Skill
 - [x] 遷移並拆分 process-task-list Skill
 - [x] 遷移 acceptance-test Skill
-- [ ] 更新安裝腳本支援 Skills
+- [x] 更新安裝腳本支援 Skills
 - [ ] 清理舊的 commands 和 agents 目錄
 - [ ] 執行驗收測試
 - [ ] 更新專案文件
@@ -182,7 +182,7 @@ SKILL.md 153 行（目標 < 200 行），拆分出三個參考檔案。
 - 測試舊 commands 清理功能
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+照預期開發。完全重寫安裝腳本，改為複製整個 skill 目錄而非單一檔案。新增 `cleanupOldCommands()` 和 `cleanupOldAgents()` 函數自動清理舊格式。
 
 ---
 
