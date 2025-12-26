@@ -1,12 +1,12 @@
-# Claude Code Config - 規格導向開發流程
+# 翻白眼技能集 / Eye-Rolling Skills
 
-一套專注於規格導向開發的 Claude Code 工作流程 Skills，透過結構化的三步驟流程，從需求澄清到完整實作，確保開發過程清晰可追蹤。
+一套讓人翻白眼的囉唆開發流程 —— 透過結構化的三步驟，從需求澄清到完整實作，確保你在動手寫 code 之前已經被問到不耐煩。
 
-![claude-code-config](assets/claude-code-config-intro.png)
+![eyerolling-skills](assets/claude-code-config-intro.png)
 
-## 🎯 核心理念
+## 🙄 核心理念
 
-**從想法到實作的完整流程：** 透過 PRD (產品需求文件) 驅動開發，確保每個功能都有清晰的需求定義、完整的實作計畫，以及可執行的驗收標準。
+**從想法到實作的完整流程：** 透過 PRD (產品需求文件) 驅動開發，確保每個功能都經過囉唆的需求確認、詳細的實作計畫，以及可執行的驗收標準。是的，就是這麼囉唆。
 
 ## 🚀 核心工作流程
 
@@ -186,6 +186,8 @@ claude-code-config/
 ## 🤝 貢獻與回饋
 
 本專案基於 [snarktank/ai-dev-tasks](https://github.com/snarktank/ai-dev-tasks) 的概念，針對 Claude Code 和繁體中文環境進行了深度客製化。
+
+為什麼叫翻白眼？因為跟 AI 反覆討論需求、一直被追問細節，從旁人的角度看起來確實有點囉唆到讓人想翻白眼。但這正是這套流程的價值：在動手之前把事情想清楚。
 
 ## 📄 授權
 
