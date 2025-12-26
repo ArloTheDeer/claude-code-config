@@ -13,7 +13,7 @@
 - [x] 遷移並拆分 process-task-list Skill
 - [x] 遷移 acceptance-test Skill
 - [x] 更新安裝腳本支援 Skills
-- [ ] 清理舊的 commands 和 agents 目錄
+- [x] 清理舊的 commands 和 agents 目錄
 - [ ] 執行驗收測試
 - [ ] 更新專案文件
 
@@ -203,7 +203,7 @@ SKILL.md 153 行（目標 < 200 行），拆分出三個參考檔案。
 - 確認 git status 顯示正確的刪除記錄
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+照預期開發。使用 `git rm -r` 刪除 commands/ 和 agents/ 目錄，共移除 6 個檔案。
 
 ---
 
