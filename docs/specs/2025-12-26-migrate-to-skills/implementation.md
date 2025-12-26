@@ -7,11 +7,11 @@
 
 ## 任務概要
 
-- [ ] 建立 Skills 目錄結構和基礎 SKILL.md
+- [x] 建立 Skills 目錄結構和基礎 SKILL.md
 - [ ] 遷移 research 和 create-prd Skills
 - [ ] 遷移並拆分 create-impl-plan Skill
 - [ ] 遷移並拆分 process-task-list Skill
-- [ ] 遷移 acceptance-tester Skill
+- [ ] 遷移 acceptance-test Skill
 - [ ] 更新安裝腳本支援 Skills
 - [ ] 清理舊的 commands 和 agents 目錄
 - [ ] 執行驗收測試
@@ -23,7 +23,7 @@
 
 **實作要點**
 - 在專案根目錄建立 `skills/` 目錄
-- 建立五個子目錄：`research/`、`create-prd/`、`create-impl-plan/`、`process-task-list/`、`acceptance-tester/`
+- 建立五個子目錄：`research/`、`create-prd/`、`create-impl-plan/`、`process-task-list/`、`acceptance-test/`
 - 為每個 skill 建立空的 `SKILL.md` 檔案，包含基本的 frontmatter 結構
 - frontmatter 必須包含 `name` 和 `description` 欄位
 - `description` 需遵循 Progressive Disclosure 原則：清楚說明功能、使用時機、觸發關鍵詞
@@ -33,14 +33,14 @@
 - `skills/create-prd/SKILL.md` - 新建
 - `skills/create-impl-plan/SKILL.md` - 新建
 - `skills/process-task-list/SKILL.md` - 新建
-- `skills/acceptance-tester/SKILL.md` - 新建
+- `skills/acceptance-test/SKILL.md` - 新建
 
 **完成檢查**
 - 確認 `skills/` 目錄結構正確建立，包含五個子目錄
 - 確認每個 SKILL.md 都有有效的 YAML frontmatter（name 和 description）
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+[方向調整] 原計畫使用 `acceptance-tester` 名稱，但因 agent 轉為 skill 後名稱應反映功能而非角色，改用 `acceptance-test`。
 
 ---
 
@@ -127,10 +127,10 @@
 
 ---
 
-### 遷移 acceptance-tester Skill
+### 遷移 acceptance-test Skill
 
 **實作要點**
-- 將 `agents/acceptance-tester.md` 遷移到 `skills/acceptance-tester/SKILL.md`
+- 將 `agents/acceptance-tester.md` 遷移到 `skills/acceptance-test/SKILL.md`
 - 修改 frontmatter 格式：
   - 移除 agent 專用欄位（model、color）
   - 保留 name 和 description
@@ -140,7 +140,7 @@
 
 **相關檔案**
 - `agents/acceptance-tester.md` - 來源（107 行）
-- `skills/acceptance-tester/SKILL.md` - 目標
+- `skills/acceptance-test/SKILL.md` - 目標
 
 **完成檢查**
 - 確認 frontmatter 只包含 name 和 description（不含 model、color）
