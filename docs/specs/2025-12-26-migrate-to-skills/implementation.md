@@ -8,7 +8,7 @@
 ## 任務概要
 
 - [x] 建立 Skills 目錄結構和基礎 SKILL.md
-- [ ] 遷移 research 和 create-prd Skills
+- [x] 遷移 research 和 create-prd Skills
 - [ ] 遷移並拆分 create-impl-plan Skill
 - [ ] 遷移並拆分 process-task-list Skill
 - [ ] 遷移 acceptance-test Skill
@@ -69,7 +69,7 @@
 - 確認 frontmatter 格式正確（YAML 語法）
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+照預期開發。額外新增 `examples/` 目錄存放範例文件，採用相對路徑連結參照，符合 Progressive Disclosure 原則。
 
 ---
 
