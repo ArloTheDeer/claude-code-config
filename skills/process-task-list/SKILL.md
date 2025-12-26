@@ -221,24 +221,13 @@ Claude Code 提供內建的 TodoWrite 工具來管理任務，這與 Cursor 等�
    - 檢測任務標題或描述中包含以下關鍵詞的任務：
      - 「驗收測試」、「acceptance testing」、「驗收」、「validate implementation」
      - 「執行驗收測試」、「進行驗收」、「驗證實作」等相關詞彙
-   - 當遇到驗收測試任務時，必須使用 Task tool 啟用 acceptance-tester agent
-   - Task tool 的 prompt 參數必須包含以下三個文件的相對路徑（基於專案根目錄）：
-     - `docs/specs/[專案目錄]/implementation.md`
-     - `docs/specs/[專案目錄]/acceptance.feature`
-     - `docs/specs/[專案目錄]/prd.md`
-   - 範例 prompt 格式：
-     ```
-     請讀取 acceptance.feature 檔案、implementation.md 檔案和 prd.md 檔案，並執行所有 Gherkin 場景。
-
-     檔案路徑：
-     - implementation.md: docs/specs/2025-09-19-example-feature/implementation.md
-     - acceptance.feature: docs/specs/2025-09-19-example-feature/acceptance.feature
-     - prd.md: docs/specs/2025-09-19-example-feature/prd.md
-     ```
-   - 驗收測試任務應由 acceptance-tester agent 專門處理，不要在主對話中直接執行
+   - 當遇到驗收測試任務時，使用 Skill tool 調用 `acceptance-test` skill
+   - 調用方式：`skill: "acceptance-test"`
+   - acceptance-test skill 會自動讀取 implementation.md、acceptance.feature 和背景文件（PRD 或 research）並執行驗收測試
+   - 驗收測試由 acceptance-test skill 專門處理，不要在當前 skill 中直接執行測試邏輯
 
 8. **工作流程：**
    - 檢查下一個待處理任務，識別是否為驗收測試任務
-   - 將任務標記為 `in_progress`（驗收測試任務啟用專門 agent）
+   - 將任務標記為 `in_progress`（驗收測試任務調用 acceptance-test skill）
    - 完成後標記為 `completed` 並同步更新 `implementation.md`
    - 等待用戶核准後再進行下一個任務
